@@ -23,37 +23,37 @@ const LoginScreen = () => {
   };
 
   return (
-    <div class="d-flex justify-content-center h-100">
-      <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <div class="login-form bg-light mt-4 p-4">
-            <form onSubmit={handleSubmit} class="row g-3">
+    <div className="d-flex justify-content-center h-100">
+      <div className="row">
+        <div className="col-md-6 offset-md-3">
+          <div className="login-form bg-light mt-4 p-4">
+            <form onSubmit={handleSubmit} className="row g-3">
               <h4>Bienvenue</h4>
-              <div class="col-12">
+              <div className="col-12">
                 <label>Username</label>
                 <input
                   type="text"
                   name="email"
-                  class="form-control"
+                  className="form-control"
                   placeholder="Votre adresse mail"
                 />
               </div>
-              <div class="col-12">
+              <div className="col-12">
                 <label>Password</label>
                 <input
                   type="password"
                   name="password"
-                  class="form-control"
+                  className="form-control"
                   placeholder="Votre mot de passe"
                 />
                 <Link to="/account/renewpass">Mot de passe oublié ?</Link>
               </div>
-              <div class="col-12">
+              <div className="col-12">
                 <LoadCanvasTemplate />
                 <div className="mt-3">
                   <div>
                     <input
-                    class="form-control"
+                    className="form-control"
                       placeholder="Enter Captcha Value"
                       id="user_captcha_input"
                       name="user_captcha_input"
@@ -62,15 +62,15 @@ const LoginScreen = () => {
                   </div>
                 </div>
               </div>
-              <div class="col-12">
-                <button type="submit" class="btn btn-dark float-end">
+              <div className="col-12">
+                <button type="submit" className="btn btn-dark float-end">
                   Login
                 </button>
               </div>
             </form>
-            <hr class="mt-4" />
-            <div class="col-12">
-              <p class="text-center mb-0">
+            <hr className="mt-4" />
+            <div className="col-12">
+              <p className="text-center mb-0">
                 Pas encore de compte ? <Link to="/register">Créez en un</Link>
               </p>
             </div>
