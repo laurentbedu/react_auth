@@ -7,16 +7,36 @@ import {
 } from "react-simple-captcha";
 
 const LoginScreen = () => {
-  useEffect(()=>{
-      loadCaptchaEnginge(6);
-  })
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const user_captcha_value =
-      document.getElementById("user_captcha_input").value;
-    if (validateCaptcha(user_captcha_value) == true) {
+    const user_captcha_value = document.getElementById("user_captcha_input").value;
+    if (validateCaptcha(user_captcha_value) === true) {
       console.log("Captcha Matched");
+      const form = event.currentTarget;
+      const formData = new FormData(form);
+      const jsonData = Object.fromEntries(formData.entries());
+      const body = JSON.stringify(jsonData);
+      fetch("http://localhost:5000/auth/login", {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        body,
+      })
+        .then((resp) => resp.text())
+        .then((text) => {
+            const data = text.toJson();
+            if(data.result){
+                document.cookie = `auth=${data.token};max-age=${60*60*24}`;
+            }
+            else{
+                document.cookie = `auth=null;max-age=0`;
+            }
+        });
     } else {
       console.log("Captcha Does Not Match");
     }
@@ -53,7 +73,7 @@ const LoginScreen = () => {
                 <div className="mt-3">
                   <div>
                     <input
-                    className="form-control"
+                      className="form-control"
                       placeholder="Enter Captcha Value"
                       id="user_captcha_input"
                       name="user_captcha_input"

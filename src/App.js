@@ -1,3 +1,4 @@
+import "./helpers/string.helper";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import BaseScreen from "./screen/BaseScreen";
