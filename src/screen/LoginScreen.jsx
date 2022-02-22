@@ -1,19 +1,24 @@
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   LoadCanvasTemplate,
   loadCaptchaEnginge,
   validateCaptcha,
 } from "react-simple-captcha";
+import { AuthContext } from "../contexts/AuthContext";
 
 const LoginScreen = () => {
+  const { setAuth } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   useEffect(() => {
-    loadCaptchaEnginge(6);
+    loadCaptchaEnginge(2);
   });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const user_captcha_value = document.getElementById("user_captcha_input").value;
+    const user_captcha_value =
+      document.getElementById("user_captcha_input").value;
     if (validateCaptcha(user_captcha_value) === true) {
       console.log("Captcha Matched");
       const form = event.currentTarget;
@@ -29,13 +34,17 @@ const LoginScreen = () => {
       })
         .then((resp) => resp.text())
         .then((text) => {
-            const data = text.toJson();
-            if(data.result){
-                document.cookie = `auth=${data.token};max-age=${60*60*24}`;
-            }
-            else{
-                document.cookie = `auth=null;max-age=0`;
-            }
+          const data = text.toJson();
+          if (data.result) {
+            document.cookie = `auth=${data.token};max-age=${60 * 60 * 24}`;
+            setAuth({ role: data.role });
+            console.log(data.role);
+            navigate("/account");
+          } else {
+            document.cookie = `auth=null;max-age=0`;
+            setAuth({ role: 0 });
+            console.log(false);
+          }
         });
     } else {
       console.log("Captcha Does Not Match");

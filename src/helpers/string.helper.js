@@ -1,4 +1,4 @@
-class StringHelpers {
+class StringHelper {
   static initialize = () => {
     String.prototype.capitalize = function () {
       return this.charAt(0).toUpperCase() + this.slice(1);
@@ -45,4 +45,4 @@ class StringHelpers {
   };
 }
 
-module.exports = StringHelpers.initialize();
+module.exports = StringHelper.initialize();

@@ -10,23 +10,31 @@ import RegisterScreen from "./screen/RegisterScreen";
 import AccountScreen from "./screen/AccountScreen";
 import RegisterValidationScreen from "./screen/RegisterValidationScreen";
 import RenewPasswordScreen from "./screen/RenewPasswordScreen";
+import { useContext } from "react";
+import { AuthContext } from './contexts/AuthContext'
+
 
 function App() {
+
+  const {auth} = useContext(AuthContext);
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<BaseScreen />}>
-          <Route index element={<HomeScreen />}/>
-          <Route path="admin" element={<AdminScreen />}/>
-          <Route path="user" element={<UserScreen />}/>
-          <Route path="login" element={<LoginScreen />}/>
-          <Route path="register" element={<RegisterScreen />}/>
-          <Route path="account" element={<AccountScreen />}/>
-          <Route path="account/validation" element={<RegisterValidationScreen />}/>
-          <Route path="account/renewpass" element={<RenewPasswordScreen />}/>    
-        </Route>
-      </Routes>
-    </BrowserRouter>
+
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<BaseScreen />}>
+            <Route index element={<HomeScreen />}/>
+            {auth.role === 2 && <Route path="admin" element={<AdminScreen />}/>}
+            {auth.role === 1 && <Route path="user" element={<UserScreen />}/>}
+            {auth.role === 0 && <Route path="login" element={<LoginScreen />}/>}
+            {auth.role === 0 && <Route path="register" element={<RegisterScreen />}/>}
+            {auth.role > 0 && <Route path="account" element={<AccountScreen />}/>}
+            <Route path="account/validation" element={<RegisterValidationScreen />}/>
+            <Route path="account/renewpass" element={<RenewPasswordScreen />}/>    
+          </Route>
+        </Routes>
+      </BrowserRouter>
+
   );
 }
 
