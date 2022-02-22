@@ -63,7 +63,9 @@ function NavBar() {
             )}
             {auth.role > 0 && (
                 <li className="nav-item">
-                    Logout
+                <Link className="nav-link" to="/logout">
+                  Logout
+                </Link>
                 </li>
                 
             )}

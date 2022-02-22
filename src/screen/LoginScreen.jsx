@@ -12,7 +12,7 @@ const LoginScreen = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    loadCaptchaEnginge(2);
+    loadCaptchaEnginge(3);
   });
 
   const handleSubmit = (event) => {
