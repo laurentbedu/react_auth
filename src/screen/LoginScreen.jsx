@@ -8,14 +8,14 @@ import {
 
 const LoginScreen = () => {
   useEffect(() => {
-    loadCaptchaEnginge(6);
+    loadCaptchaEnginge(3);
   });
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const user_captcha_value = document.getElementById("user_captcha_input").value;
     if (validateCaptcha(user_captcha_value) === true) {
-      console.log("Captcha Matched");
+      //console.log("Captcha Matched");
       const form = event.currentTarget;
       const formData = new FormData(form);
       const jsonData = Object.fromEntries(formData.entries());
