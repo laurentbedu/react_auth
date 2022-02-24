@@ -38,12 +38,10 @@ const LoginScreen = () => {
           if (data.result) {
             document.cookie = `auth=${data.token};max-age=${60 * 60 * 24}`;
             setAuth({ role: data.role });
-            // console.log(data.role);
             navigate("/account");
           } else {
             document.cookie = `auth=null;max-age=0`;
             setAuth({ role: 0 });
-            // console.log(false);
           }
         });
     } else {
